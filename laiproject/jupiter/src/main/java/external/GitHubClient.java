@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -28,8 +29,11 @@ public class GitHubClient {
 		if (keyword == null) {
 			keyword = DEFAULT_KEYWORD;
 		}
+		
+		//判断非空
 		try {
 			keyword = URLEncoder.encode(keyword, "UTF-8");
+			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -60,8 +64,20 @@ public class GitHubClient {
 		return new ArrayList<>();
 	}
    
-	private List<Item> getItemList(JSONArray array){
+private List<Item> getItemList(JSONArray array){
 	 List<Item> itemlist=new ArrayList<>();
+	 List<String> descriptionList=new ArrayList<>();
+	 for(int i=0;i<array.length();i++) {
+		 String description=getStringFieldOrEmpty(array.getJSONObject(i),"description");
+		 if (description.equals("") || description.equals("\n")) {
+				descriptionList.add(getStringFieldOrEmpty(array.getJSONObject(i), "title"));
+			} else {
+				descriptionList.add(description);
+			}	
+	 }
+	 List<List<String>> keywords = MonkeyLearnClient
+				.extractKeywords(descriptionList.toArray(new String[descriptionList.size()]));
+	 
 	 for(int i=0;i<array.length();i++) {
 		 JSONObject object=array.getJSONObject(i);
 		 ItemBuilder builder=new ItemBuilder();
@@ -70,7 +86,8 @@ public class GitHubClient {
          builder.setAddress(getStringFieldOrEmpty(object,"location"));
          builder.setUrl(getStringFieldOrEmpty(object,"url"));
          builder.setImageUrl(getStringFieldOrEmpty(object, "company_logo"));
-       Item item=builder.build();
+         builder.setKeywords(new HashSet<String>(keywords.get(i))); 
+         Item item=builder.build();
        itemlist.add(item);
 	  }
 	   return itemlist;
