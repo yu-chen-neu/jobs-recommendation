@@ -1,6 +1,10 @@
+/Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/rpc/ItemHistory.java
+/Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/db/MySQLDBUtil.java
 /Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/entity/Item.java
 /Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/rpc/RecommendItem.java
+/Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/db/MySQLTableCreation.java
 /Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/external/GitHubClient.java
+/Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/db/MySQLConnection.java
 /Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/external/MonkeyLearnClient.java
 /Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/rpc/RpcHelper.java
 /Users/chenyu/git/jobs-recommendation/laiproject/jupiter/src/main/java/rpc/SearchItem.java
